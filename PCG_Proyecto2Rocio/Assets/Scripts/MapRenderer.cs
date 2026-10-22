@@ -218,7 +218,7 @@ public class MapRenderer : MonoBehaviour
                 Color c = ColorPorAltura(alturas[x, y]); // 1) color base del terreno
                 bandas[IndiceBanda(h)]++;
 
-                if (cuevas[x, y]) c = colorHueco; // 2) si es cueva se pinta encima
+                if (cuevas[x, y]) { c = colorHueco; celdasCueva++;  }// 2) si es cueva se pinta encima
 
                 // 3) árboles encima de todo (solo si el L-System estaba activado)
                 if (arboles != null)
@@ -249,7 +249,7 @@ public class MapRenderer : MonoBehaviour
             "Roca: " + (100f * bandas[3] / total).ToString("F1") + "%\n" +
             "Nieve/ceniza: " + (100f * bandas[4] / total).ToString("F1") + "%\n" +
             "Cuevas: " + (100f * celdasCueva / total).ToString("F1") + "%\n" +
-            "Árboles: " + LSystemGenerator.arbolesColocados + "%\n" +
+            "Árboles: " + LSystemGenerator.arbolesColocados + "\n" +
             "Tiempo: " + ms.ToString("F1") + " ms");
     }
 
