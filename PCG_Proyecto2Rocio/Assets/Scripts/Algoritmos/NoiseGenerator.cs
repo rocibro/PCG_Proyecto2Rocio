@@ -18,8 +18,10 @@ public static class NoiseGenerator
         float[,] mapa = new float[ancho, alto];
         float escala = Mathf.Max(0.0001f, s.escala);
 
+        PerlinPropio.Inicializar(seed);
+
         // Con la seed generamos un punto de partida distinto por cada octava
-        System.Random rng = new System.Random(seed);
+        System.Random rng = new System.Random(seed + 7);
         Vector2[] offsets = new Vector2[s.octavas];
         for (int i = 0; i < s.octavas; i++)
         {
@@ -44,7 +46,7 @@ public static class NoiseGenerator
                 {
                     float sx = (x / escala) * frecuencia + offsets[o].x;
                     float sy = (y / escala) * frecuencia + offsets[o].y;
-                    float perlin = Mathf.PerlinNoise(sx, sy) * 2f - 1f; // rango -1 a 1
+                    float perlin = PerlinPropio.Ruido(sx, sy); 
                     valor += perlin * amplitud;
 
                     amplitud *= s.persistencia;
